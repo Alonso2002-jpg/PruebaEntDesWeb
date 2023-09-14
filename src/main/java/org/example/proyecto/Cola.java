@@ -38,7 +38,6 @@ public class Cola{
         mostrarProcesos();
         while (!colaProcesos.isEmpty()){
             Proceso pr=colaProcesos.remove(0);
-            System.out.println("Al proceso " + pr.nombre + " le queda "+pr.quantum);
             pr.quantum--;
 
             if (pr.quantum>0){
@@ -49,6 +48,7 @@ public class Cola{
         }
         System.out.println("Acabado");
     }
+
     public void mostrarProcesos(){
         if (!colaProcesos.isEmpty()){
             for (int i = 0; i < colaProcesos.size(); i++) {
