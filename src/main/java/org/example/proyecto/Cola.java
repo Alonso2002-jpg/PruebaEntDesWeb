@@ -1,17 +1,19 @@
 package org.example.proyecto;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
-public class Cola{
-    Vector<Proceso> colaProcesos=new Vector<>(50);
+public class Cola {
+    Vector<Proceso> colaProcesos;
 
-    public Cola() {
-        crearProcesos();
+    public Cola(int tamano) {
+        colaProcesos=new Vector<>(tamano);
+        crearProcesos(tamano);
     }
 
-    public void crearProcesos(){
-        for (int i = 0; i < 5; i++) {
+    public void crearProcesos(int tamano){
+        for (int i = 0; i < tamano; i++) {
             int quantum=(int) ((Math.random()*100+1));
             Proceso proceso=new Proceso();
             proceso.setNombre("P"+i);
@@ -35,7 +37,6 @@ public class Cola{
     }
 
     public void ejecutarProcesos(){
-        mostrarProcesos();
         while (!colaProcesos.isEmpty()){
             Proceso pr=colaProcesos.remove(0);
             pr.quantum--;
@@ -59,8 +60,15 @@ public class Cola{
         }
     }
 
+    public Vector<Proceso> getColaProcesos() {
+        return colaProcesos;
+    }
+
+    public int getTamanoCola(){
+        return colaProcesos.size();
+    }
     public static void main(String[] args) {
-        Cola c = new Cola();
+        Cola c = new Cola(20);
         c.ejecutarProcesos();
     }
 }
