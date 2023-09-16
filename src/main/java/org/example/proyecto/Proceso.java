@@ -14,7 +14,7 @@ public class Proceso {
 
     public Proceso() {
        PID = UUID.randomUUID().toString();
-       prioridad=(int) ((Math.random()*8));
+       prioridad=(int) ((Math.random()*9));
        tiempoCreacion=new Date();
        tiempoUltiModif= new Date();
     }

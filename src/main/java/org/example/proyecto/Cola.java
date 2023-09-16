@@ -1,14 +1,14 @@
 package org.example.proyecto;
 
-import java.util.List;
-import java.util.Random;
 import java.util.Vector;
 
 public class Cola {
-    Vector<Proceso> colaProcesos;
+    Vector<Vector<Proceso>> colaProcesos;
+    Vector<Proceso> procesos;
 
     public Cola(int tamano) {
-        colaProcesos=new Vector<>(tamano);
+        procesos =new Vector<>(tamano);
+        colaProcesos=new Vector<>();
         crearProcesos(tamano);
     }
 
@@ -18,57 +18,61 @@ public class Cola {
             Proceso proceso=new Proceso();
             proceso.setNombre("P"+i);
             proceso.setQuantum(quantum);
-            colaProcesos.add(proceso);
+            procesos.add(proceso);
         }
         ordenarProcesos();
     }
 
     public void ordenarProcesos(){
-        for (int i = 0; i < colaProcesos.size(); i++) {
-            for (int j = 0; j < colaProcesos.size() - 1; j++) {
-                if (colaProcesos.get(j).prioridad > colaProcesos.get(j+1).prioridad) {
-                    Proceso temp = colaProcesos.get(j);
-                    colaProcesos.set(j,colaProcesos.get(j+1));
-                    colaProcesos.set(j+1,temp);
+        for (int i = 0; i < 9; i++) {
+            colaProcesos.add(new Vector<>());
+            for (int j = 0; j < procesos.size(); j++) {
+                if (procesos.get(j).prioridad==i){
+                    Proceso newP=procesos.remove(j);
+                    colaProcesos.get(i).add(newP);
+                    j--;
                 }
             }
         }
-
     }
 
-    public void ejecutarProcesos(){
-        while (!colaProcesos.isEmpty()){
-            Proceso pr=colaProcesos.remove(0);
-            pr.quantum--;
-
-            if (pr.quantum>0){
-                colaProcesos.add(pr);
-            }else{
-                System.out.println("Proceso : "+pr.nombre + " acabado!");
+    public void ejecutarProcesos() {
+        while (!colaProcesos.isEmpty()) {
+            while (!colaProcesos.get(0).isEmpty()) {
+                for (int j = 0; j < colaProcesos.get(0).size(); j++) {
+                    Proceso ActProceso = colaProcesos.get(0).remove(j);
+                    if (ActProceso.quantum != 0) {
+                        ActProceso.quantum--;
+                        colaProcesos.get(0).add(ActProceso);
+                    }
+                }
             }
+            colaProcesos.remove(0);
         }
-        System.out.println("Acabado");
+        System.out.println("Procesos Terminados!");
     }
 
     public void mostrarProcesos(){
         if (!colaProcesos.isEmpty()){
             for (int i = 0; i < colaProcesos.size(); i++) {
-                System.out.println(colaProcesos.get(i));
+                for (int j = 0; j < colaProcesos.get(i).size(); j++) {
+                    System.out.println("Procesos " + i + " de " + j + ": "+ colaProcesos.get(i).get(j));
+                }
             }
         }else{
             System.out.println("Esta vacio!");
         }
     }
 
-    public Vector<Proceso> getColaProcesos() {
-        return colaProcesos;
+    public Vector<Proceso> getProcesos() {
+        return procesos;
     }
 
     public int getTamanoCola(){
-        return colaProcesos.size();
+        return procesos.size();
     }
     public static void main(String[] args) {
-        Cola c = new Cola(20);
+        Cola c = new Cola(400);
         c.ejecutarProcesos();
     }
 }

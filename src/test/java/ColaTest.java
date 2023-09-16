@@ -20,14 +20,14 @@ public class ColaTest {
     @Test
     public void ordenarProcesosTest(){
         Cola colaTest = new Cola(50);
-        Vector<Proceso> copyColaTest= (Vector<Proceso>) colaTest.getColaProcesos().clone();
+        Vector<Proceso> copyColaTest= (Vector<Proceso>) colaTest.getProcesos().clone();
         Collections.sort(copyColaTest, new Comparator<Proceso>() {
             @Override
             public int compare(Proceso o1, Proceso o2) {
                 return o1.getPrioridad() - o2.getPrioridad();
             }
         });
-        assertEquals(copyColaTest,colaTest.getColaProcesos());
+        assertEquals(copyColaTest,colaTest.getProcesos());
     }
 
     @Test
