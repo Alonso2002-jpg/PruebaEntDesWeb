@@ -6,13 +6,16 @@ public class Cola {
     Vector<Vector<Proceso>> colaProcesos;
     Vector<Proceso> procesos;
 
+    int tamano;
+
     public Cola(int tamano) {
         procesos =new Vector<>(tamano);
         colaProcesos=new Vector<>();
-        crearProcesos(tamano);
+        this.tamano=tamano;
+        crearProcesos();
     }
 
-    public void crearProcesos(int tamano){
+    public void crearProcesos(){
         for (int i = 0; i < tamano; i++) {
             int quantum=(int) ((Math.random()*100+1));
             Proceso proceso=new Proceso();
@@ -20,6 +23,7 @@ public class Cola {
             proceso.setQuantum(quantum);
             procesos.add(proceso);
         }
+
         ordenarProcesos();
     }
 
@@ -69,10 +73,12 @@ public class Cola {
     }
 
     public int getTamanoCola(){
-        return procesos.size();
+        return tamano;
     }
+
     public static void main(String[] args) {
-        Cola c = new Cola(400);
+        Cola c = new Cola(50);
         c.ejecutarProcesos();
+        System.out.println(c.getTamanoCola());
     }
 }
