@@ -46,7 +46,7 @@ public class Cola {
                 for (int j = 0; j < colaProcesos.get(0).size(); j++) {
                     Proceso ActProceso = colaProcesos.get(0).remove(j);
                     if (ActProceso.quantum != 0) {
-                        ActProceso.quantum--;
+                        ActProceso.reducirQuantum();
                         colaProcesos.get(0).add(ActProceso);
                     }
                 }
