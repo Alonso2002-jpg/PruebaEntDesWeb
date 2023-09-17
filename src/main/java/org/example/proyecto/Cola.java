@@ -53,19 +53,6 @@ public class Cola {
             }
             colaProcesos.remove(0);
         }
-        System.out.println("Procesos Terminados!");
-    }
-
-    public void mostrarProcesos(){
-        if (!colaProcesos.isEmpty()){
-            for (int i = 0; i < colaProcesos.size(); i++) {
-                for (int j = 0; j < colaProcesos.get(i).size(); j++) {
-                    System.out.println("Procesos " + i + " de " + j + ": "+ colaProcesos.get(i).get(j));
-                }
-            }
-        }else{
-            System.out.println("Esta vacio!");
-        }
     }
 
     public Vector<Proceso> getProcesos() {
